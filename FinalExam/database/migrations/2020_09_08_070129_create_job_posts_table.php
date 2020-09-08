@@ -14,8 +14,12 @@ class CreateJobPostsTable extends Migration
     public function up()
     {
         Schema::create('job_posts', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->increments('id');
+            $table->string('company_name')->nullable();
+            $table->string('job_title')->nullable();
+            $table->string('job_location')->nullable();
+            $table->string('salary')->nullable();
+     
         });
     }
 

@@ -14,7 +14,8 @@ class JobPostController extends Controller
      */
     public function index()
     {
-        //
+        $contact = JobPost::orderBy('id', 'desc')->get();
+        return view('backend.pages.contact.manage', compact('contact'));
     }
 
     /**
@@ -24,7 +25,7 @@ class JobPostController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class JobPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $contacts = new JobPost();
+        $contacts->company_name             = $request->company_name;
+        $contacts->job_title             = $request->job_title;
+        $contacts->job_location        = $request->job_location;
+        $contacts->salary        = $request->salary;
+        
+        $contacts->save();
     }
 
     /**
@@ -55,9 +62,15 @@ class JobPostController extends Controller
      * @param  \App\JobPost  $jobPost
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobPost $jobPost)
+    public function edit(JobPost $jobPost,$id)
     {
-        //
+        $jobPost = JobPost::find($id);
+        if ( !is_null($jobPost) ){
+            return view('backend.pages.edit', compact('jobPost'));
+        }
+        else{
+            return route('manageContact');
+        }
     }
 
     /**
@@ -69,7 +82,13 @@ class JobPostController extends Controller
      */
     public function update(Request $request, JobPost $jobPost)
     {
-        //
+        $contacts = new JobPost();
+        $contacts->company_name             = $request->company_name;
+        $contacts->job_title             = $request->job_title;
+        $contacts->job_location        = $request->job_location;
+        $contacts->salary        = $request->salary;
+        
+        $contacts->save();
     }
 
     /**
@@ -78,8 +97,14 @@ class JobPostController extends Controller
      * @param  \App\JobPost  $jobPost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobPost $jobPost)
+    public function destroy(JobPost $jobPost,$id)
     {
-        //
+        $ContactInfo=JobPost::find($id);
+        if ( !is_null($ContactInfo) ){
+            $ContactInfo->delete(); 
+            
+
+        }
+        return redirect()->route('manageContact');
     }
 }
