@@ -21,7 +21,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
+Route::get('admin/home', 'HomeController@adminHome')->name('admin.home');
+Route::get('createUsers', 'Auth/RegisterController@create')->name('userRegister');
