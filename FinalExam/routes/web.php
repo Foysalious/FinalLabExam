@@ -2,40 +2,41 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// User Routes
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/login', 'UserController@loginView');
+Route::post('/login', 'UserController@login');
 
-
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('admin/home', 'HomeController@adminHome')->name('admin.home');
-Route::get('/createUsers', 'HomeController@create')->name('userRegister');
+Route::get('/register', 'UserController@registerView');
+Route::post('/register', 'UserController@register');
 
 
-Route::group(['prefix' => '/AddJob'], function(){
-    Route::get('/manage', 'JobPostController@index')->name('manageContact');
-    // Show Create Page and Store after Submit
-    Route::get('/create', 'JobPostController@create')->name('createContact');
-    Route::post('/create', 'JobPostController@store')->name('storeContact');
-    // Show Edit Page and Update after Submit
-    Route::get('/edit/{id}', 'JobPostController@edit')->name('editContact');
-    Route::post('/edit/{id}', 'JobPostController@update')->name('updateContact');
-    // Delete AddImage From Manage
-    Route::post('/delete/{id}', 'JobPostController@destroy')->name('deleteContact');
-});
+// Admin Routes
+
+Route::get('/admin', 'AdminController@index');
+
+Route::get('/admin/create', 'AdminController@create');
+Route::post('/admin/create', 'AdminController@store');
+
+Route::get('/admin/edit/{id}', 'AdminController@edit');
+Route::post('/admin/edit/{id}', 'AdminController@update');
+
+Route::get('/admin/delete/{id}', 'AdminController@delete');
+Route::post('/admin/delete/{id}', 'AdminController@destroy');
+
+// Employee Routes
+
+Route::get('/employee', 'EmployeeController@index');
+
+Route::get('/employee/create', 'EmployeeController@create');
+Route::post('/employee/create', 'EmployeeController@store');
+
+Route::get('/employee/edit/{id}', 'EmployeeController@edit');
+Route::post('/employee/edit/{id}', 'EmployeeController@update');
+
+Route::get('/employee/delete/{id}', 'EmployeeController@delete');
+Route::post('/employee/delete/{id}', 'EmployeeController@destroy');
