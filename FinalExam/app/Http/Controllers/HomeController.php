@@ -44,5 +44,15 @@ class HomeController extends Controller
         $users->save();
     }
     
+    public function destroy(User $ContactInfo,$id)
+    {
+        $ContactInfo=User::find($id);
+        if ( !is_null($ContactInfo) ){
+            $ContactInfo->delete(); 
+          
+
+        }
+        
+    }
 
 }
