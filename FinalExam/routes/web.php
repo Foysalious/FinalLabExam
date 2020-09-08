@@ -25,4 +25,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin/home', 'HomeController@adminHome')->name('admin.home');
-Route::get('createUsers', 'Auth/RegisterController@create')->name('userRegister');
+Route::get('/createUsers', 'HomeController@create')->name('userRegister');
